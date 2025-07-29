@@ -31,7 +31,7 @@ export async function signUpUser(user) {
   }
 }
 
-export async function signInUser(userData) {
+export async function signInUser(userData : any) {
   const user = await prismaClient.user.findUnique({
     where: {
       email: userData.email,
