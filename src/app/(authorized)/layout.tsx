@@ -3,14 +3,14 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
 
-export default async function layout({ children }) {
+export default async function layout({ children } : {children : any}) {
   const cookie = await cookies();
   const token = cookie.get("token")?.value;
 
   if (!token?.length) {
     redirect("/login");
   }
-  
+
   return (
     <div>
       <Navbar />

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-export default function LostCard({item}) {
+export default function LostCard({item} : {item : any}) {
   
   return (
      <div className='text-xl h-90 w-full bg-white rounded-lg relative'>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-export default function FoundCard({item}) {
+export default function FoundCard({item} : {item : any}) {
   return (
     <div className="text-xl h-90 w-full bg-white rounded-lg relative">
       <span className="bg-green-400 px-2 py-1 rounded-md text-xs font-medium absolute top-3 right-4 text-center w-15">{item.status}</span>

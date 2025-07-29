@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
 
-export function generateToken(userData){ 
-    const token = jwt.sign(userData , process.env.JWT_SECRET , {
+export function generateToken(userData : any){ 
+    const token = jwt.sign(userData , process.env.JWT_SECRET as string , {
         expiresIn : '1d'
     })
     return token;
 }
 
-export function verifyToken(token){
-    const userData = jwt.verify(token , process.env.JWT_SECRET);
+export function verifyToken(token : string){
+    const userData = jwt.verify(token , process.env.JWT_SECRET as string);
     return userData;
 }

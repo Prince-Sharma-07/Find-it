@@ -4,7 +4,7 @@ import { generateToken } from "./services/jwt";
 import prismaClient from "./services/prisma";
 import { redirect } from "next/navigation";
 
-export async function signUpUser(user) {
+export async function signUpUser(user : any) {
   try {
     const newUser = await prismaClient.user.create({
       data: user,
@@ -23,7 +23,7 @@ export async function signUpUser(user) {
     //     message : "The user created successfully",
     //     data : newUser
     // }
-  } catch (err) {
+  } catch (err : any) {
     return {
       success: false,
       message: err.message,
@@ -66,7 +66,7 @@ export async function logOutUser(){
     cookie.delete('token')
 }
 
-export async function addItem(itemData) {
+export async function addItem(itemData : any) {
   try{
     const item = await prismaClient.item.create({
       data : itemData
@@ -77,7 +77,7 @@ export async function addItem(itemData) {
       data : item
     }
   }
-  catch(err){
+  catch(err : any){
     console.log(err)
     return {
       success : false,
