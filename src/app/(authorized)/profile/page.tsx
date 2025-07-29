@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { verifyToken } from "@/services/jwt";
 import prismaClient from "@/services/prisma";
 import { cookies } from "next/headers";

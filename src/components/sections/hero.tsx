@@ -12,7 +12,7 @@ export default function Hero() {
             stronger.
             </p>
         </div>
-        <SearchInput />
+        <SearchInput className='' />
         <div className='flex-1 flex items-center justify-center bg-[#020817] p-8 text-white shadow-lg w-1/2 gap-8'>
             <Link href="/lost" className='px-4 py-2 bg-gradient-to-r from-[#DC2627] to-[#DB2775] rounded-md'>Report Lost item</Link>
             <Link href="/found" className='px-4 py-2 border-[#22C55E] border rounded-md'>Report Found item</Link>
