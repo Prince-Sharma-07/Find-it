@@ -1,11 +1,11 @@
 "use client";
-import { addLostItem } from "@/actions";
-import React, { useState } from "react";
+import { addItem } from "@/actions";
+import { FormEvent, useState } from "react";
 
 export default function Lost() {
-  const [itemName, setItemName] = useState<string>("");
-  const [itemDescription, setItemDescription] = useState<string>("");
-  const [locationLost, setLocationLost] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
   const [error, setError] = useState<string>("");
 
   async function handleItemLost(e: FormEvent) {
@@ -13,19 +13,20 @@ export default function Lost() {
     setError("");
 
     const item = {
-      itemName,
-      itemDescription,
-      locationLost,
+      name,
+      description,
+      location,
+      status: "LOST",
     };
-    const response = await addLostItem(item);
+    const response = await addItem(item);
     if (!response.success) {
       setError(response.message);
     } else {
       alert(response.message);
     }
-    setItemName("");
-    setItemDescription("");
-    setLocationLost("");
+    setName("");
+    setDescription("");
+    setLocation("");
   }
 
   return (
@@ -39,8 +40,8 @@ export default function Lost() {
         <label className="block mb-4">
           <span className="text-gray-700">Item Name</span>
           <input
-            value={itemName}
-            onChange={(e) => setItemName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             type="text"
             placeholder="Enter item name"
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
@@ -49,8 +50,8 @@ export default function Lost() {
         <label className="block mb-4">
           <span className="text-gray-700">Description</span>
           <textarea
-            value={itemDescription}
-            onChange={(e) => setItemDescription(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             placeholder="Describe the item"
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             rows={4}
@@ -59,8 +60,8 @@ export default function Lost() {
         <label className="block mb-4">
           <span className="text-gray-700">Location Lost</span>
           <input
-            value={locationLost}
-            onChange={(e) => setLocationLost(e.target.value)}
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
             type="text"
             placeholder="Where was it lost?"
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"

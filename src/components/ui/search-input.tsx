@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function SearchInput() {
+export default function SearchInput({className} : {className : string}) {
   return (
-    <label className="input">
+    <label className={`input ${className}`} >
       <svg
         className="h-[1em] opacity-50"
         xmlns="http://www.w3.org/2000/svg"

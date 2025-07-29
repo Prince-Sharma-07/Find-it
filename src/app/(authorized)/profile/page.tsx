@@ -8,7 +8,6 @@ import React from "react";
 export default async function Profile() {
   const cookie = await cookies();
   const token = cookie.get("token")?.value;
-  console.log("Over token:-> ", token);
 
   if (!token?.length) {
     redirect("/login");

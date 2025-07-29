@@ -23,17 +23,19 @@ model User {
   confirmPassword String
 }
 
-model LostItem {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  itemName String
-  itemDescription String  
-  locationLost String
+
+enum ItemStatus {
+  LOST
+  FOUND
 }
 
-model FoundItem {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  itemName String
-  itemDescription String  
-  locationFound String
+model Item {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  description String
+  location    String
+  imageUrl    String?
+  status      ItemStatus
+  contactInfo String?
+  createdAt   DateTime @default(now())
 }
-

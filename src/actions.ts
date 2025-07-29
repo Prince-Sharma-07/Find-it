@@ -64,17 +64,16 @@ export async function signInUser(userData) {
 export async function logOutUser(){
     const cookie = await cookies()
     cookie.delete('token')
-    redirect('/login')
 }
 
-export async function addFoundItem(itemData) {
+export async function addItem(itemData) {
   try{
-    const item = await prismaClient.foundItem.create({
+    const item = await prismaClient.item.create({
       data : itemData
     })
     return {
       success : true,
-      message : "Founded item listed successfully",
+      message : "Item listed successfully",
       data : item
     }
   }
@@ -87,23 +86,13 @@ export async function addFoundItem(itemData) {
   }
 }
 
-export async function addLostItem(itemData) {
+export async function getAllItems() {
   try{
-    const item = await prismaClient.lostItem.create({
-      data : itemData
-    })
-    return {
-      success : true,
-      message : "Lost item listed successfully",
-      data : item
-    }
-  }
-  catch(err){
+    const allItems = await prismaClient.item.findMany()
+    return allItems
+  }catch(err){
     console.log(err)
-    return {
-      success : false,
-      message : err.message
-    }
+    return []
   }
 }
 
