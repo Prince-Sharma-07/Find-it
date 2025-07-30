@@ -1,6 +1,7 @@
 //@ts-nocheck
 "use client";
-import { addItem } from "@/actions";
+import { addItem, getCurrentUser } from "@/actions";
+import { redirect } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function Found() {
@@ -12,7 +13,6 @@ export default function Found() {
   async function handleItemFound(e: FormEvent) {
     e.preventDefault();
     setError("");
-
     const item = {
       name,
       description,
@@ -23,11 +23,12 @@ export default function Found() {
     if (!response.success) {
       setError(response.message);
     } else {
-      alert(response.message);
+      setName("");
+      setDescription("");
+      setLocation("");
+      alert("item added successfully!");
+      redirect("/");
     }
-    setName("");
-    setDescription("");
-    setLocation("");
   }
 
   return (

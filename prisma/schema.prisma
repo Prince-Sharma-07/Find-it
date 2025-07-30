@@ -23,19 +23,19 @@ model User {
   confirmPassword String
 }
 
-
 enum ItemStatus {
   LOST
   FOUND
 }
 
 model Item {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
   description String
   location    String
   imageUrl    String?
   status      ItemStatus
   contactInfo String?
-  createdAt   DateTime @default(now())
+  createdAt   DateTime   @default(now())
+  authorId    String
 }

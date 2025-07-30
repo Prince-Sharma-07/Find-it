@@ -1,7 +1,6 @@
 //@ts-nocheck
 import { getAllItems } from "@/actions";
-import FoundCard from "@/components/cards/found-card";
-import LostCard from "@/components/cards/lost-card";
+import Feed from "@/components/layout/feed";
 import SearchInput from "@/components/ui/search-input";
 
 export default async function SearchFeed() {
@@ -20,19 +19,7 @@ export default async function SearchFeed() {
         </p>
         <SearchInput className="w-[75%] mt-5 bg-[#020817] text-white" />
       </section>
-      <main className="grid grid-cols-3 gap-8 w-[75%]">
-        {allItems.length ? (
-          allItems.map((item) =>
-            item.status === "FOUND" ? (
-              <FoundCard key={item.id} item={item} />
-            ) : (
-              <LostCard key={item.id} item={item}/>
-            )
-          )
-        ) : (
-          <div className="text-white font-medium col-start-2 text-xl">NO ITEMS FOUND...</div>
-        )}
-      </main>
+      <Feed initialData={allItems} fallback={"NO ITEMS FOUND..."}/>
     </div>
   );
 }

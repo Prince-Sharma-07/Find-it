@@ -1,6 +1,8 @@
 //@ts-nocheck
 "use client";
 import { signUpUser } from "@/actions";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function SignUp() {
@@ -25,9 +27,14 @@ export default function SignUp() {
     const res = await signUpUser(user);
 
     if (!res.success) {
-      setError(res.message);
+      if (res.message.includes("User_email_key")) {
+        setError("User already Exists!");
+      } else {
+        console.log(res.message);
+        setError("Something went Wrong");
+      }
     } else {
-      alert(res.message);
+      redirect("/");
     }
   }
   return (
@@ -48,7 +55,11 @@ export default function SignUp() {
           onSubmit={handleSignUp}
           className="flex flex-col gap-4 w-full px-8"
         >
-          {error ? <p className="text-red-400">{error}</p> : <></>}
+          {error ? (
+            <p className="text-red-400 text-center w-full">{error}</p>
+          ) : (
+            <></>
+          )}
           <label className="flex flex-col gap-2">
             Name
             <input
@@ -100,11 +111,16 @@ export default function SignUp() {
             />
           </label>
 
-          <label className="flex items-center gap-2 mb-4">
+          <label className="flex items-center gap-2">
             <input type="checkbox" className="h-4 w-4" />
             <span className="text-sm">I agree to the Terms and Conditions</span>
           </label>
-
+          <div>
+            Already a User?{" "}
+            <Link href={"/login"} className="text-blue-400 hover:text-blue-500">
+              Login.
+            </Link>
+          </div>
           <button
             type="submit"
             className="bg-[#067954] text-white px-6 py-2 rounded-lg shadow-md hover:bg-[#045d3d] transition cursor-pointer"

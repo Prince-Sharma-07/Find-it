@@ -1,6 +1,7 @@
 //@ts-nocheck
 "use client";
 import { signInUser } from "@/actions";
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 export default function Login() {
@@ -64,6 +65,7 @@ return (
             className="p-2 rounded-lg border-[#1E293B] border"
           />
         </label>
+        <div>New User? <Link href={'/signup'} className="text-blue-400 hover:text-blue-500">Register.</Link></div>
         <button
           type="submit"
           className="bg-[#067954] text-white px-6 py-2 rounded-lg shadow-md hover:bg-[#045d3d] transition cursor-pointer"
