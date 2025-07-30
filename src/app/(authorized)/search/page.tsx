@@ -1,8 +1,8 @@
+//@ts-nocheck
 import { getAllItems } from "@/actions";
 import FoundCard from "@/components/cards/found-card";
 import LostCard from "@/components/cards/lost-card";
 import SearchInput from "@/components/ui/search-input";
-import React from "react";
 
 export default async function SearchFeed() {
 

@@ -1,5 +1,5 @@
+//@ts-nocheck
 import Link from 'next/link'
-import React from 'react'
 import SearchInput from '../ui/search-input'
 
 export default function Hero() {

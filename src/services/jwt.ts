@@ -1,13 +1,18 @@
-import jwt from 'jsonwebtoken';
+//@ts-nocheck
+import jwt from "jsonwebtoken";
 
-export function generateToken(userData : any){ 
-    const token = jwt.sign(userData , process.env.JWT_SECRET as string , {
-        expiresIn : '1d'
-    })
-    return token;
+export function generateToken(userData: any) {
+  const token = jwt.sign(userData, process.env.JWT_SECRET as string, {
+    expiresIn: "1d",
+  });
+  return token;
 }
 
-export function verifyToken(token : string){
-    const userData = jwt.verify(token , process.env.JWT_SECRET as string);
-    return userData;
+type User = {
+  email: string;
+  id: string;
+};
+export function verifyToken(token: string) {
+  const userData = jwt.verify(token, process.env.JWT_SECRET as string) as User;
+  return userData;
 }

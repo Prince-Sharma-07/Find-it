@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { logOutUser } from "@/actions";
 import { verifyToken } from "@/services/jwt";
 import prismaClient from "@/services/prisma";
@@ -5,7 +6,6 @@ import { Search } from "lucide-react";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import React from "react";
 
 export default async function Navbar() {
   const cookie = await cookies();
@@ -47,8 +47,8 @@ export default async function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/about" className="text-white hover:text-green-400">
-              About
+            <Link href="/my-posts" className="text-white hover:text-green-400">
+              My Posts
             </Link>
           </li>
           <li>

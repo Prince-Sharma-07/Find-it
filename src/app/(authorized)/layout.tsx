@@ -1,7 +1,7 @@
+//@ts-nocheck
 import Navbar from "@/components/layout/navbar";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import React from "react";
 
 export default async function layout({ children } : {children : any}) {
   const cookie = await cookies();

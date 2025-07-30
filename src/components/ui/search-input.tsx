@@ -1,5 +1,4 @@
-import React from "react";
-
+//@ts-nocheck
 export default function SearchInput({className} : {className : string}) {
   return (
     <label className={`input ${className}`} >

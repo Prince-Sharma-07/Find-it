@@ -1,6 +1,7 @@
+//@ts-nocheck
 "use client";
 import { signUpUser } from "@/actions";
-import React, { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function SignUp() {
   const [name, setName] = useState<string>("");

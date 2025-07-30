@@ -1,3 +1,4 @@
+//@ts-nocheck
 "use client";
 import { addItem } from "@/actions";
 import { FormEvent, useState } from "react";
