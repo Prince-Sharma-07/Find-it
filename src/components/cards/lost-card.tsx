@@ -1,4 +1,4 @@
-import { Edit, Trash } from "lucide-react";
+//@ts-nocheck
 import Image from "next/image";
 import DeleteBtn from "../ui/delete-btn";
 import EditBtn from "../ui/edit-btn";

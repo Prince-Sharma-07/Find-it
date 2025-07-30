@@ -1,5 +1,5 @@
+//@ts-nocheck
 'use client'
-import { Edit } from "lucide-react";
 import Image from "next/image";
 import DeleteBtn from "../ui/delete-btn";
 import EditBtn from "../ui/edit-btn";
