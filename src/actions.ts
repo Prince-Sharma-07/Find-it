@@ -42,7 +42,7 @@ export async function signInUser(userData : any) {
   if (!user || user.password != userData.password) {
     return {
       success: false,
-      message: "Invalid Credentials",
+      message: "Invalid Email or Password",
     };
   }
 

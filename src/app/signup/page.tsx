@@ -48,7 +48,7 @@ export default function SignUp() {
           onSubmit={handleSignUp}
           className="flex flex-col gap-4 w-full px-8"
         >
-          {error.length ? <p className="text-red-400">{error}</p> : <></>}
+          {error ? <p className="text-red-400">{error}</p> : <></>}
           <label className="flex flex-col gap-2">
             Name
             <input
