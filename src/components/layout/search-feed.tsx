@@ -1,14 +1,14 @@
 //@ts-nocheck
 'use client'
-import React, { useState } from "react";
+import { useState } from "react";
 import FoundCard from "../cards/found-card";
 import LostCard from "../cards/lost-card";
 
-export default function Feed({ initialData, fallback }) {
+export default function SearchFeed({ initialData }) {
   const [allItems, setAllItems] = useState(initialData);
-
+  
   return (
-    <main className="grid grid-cols-3 gap-8 w-[75%]">
+    <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-[85%] md:w-[85%] lg:w-[80%] xl:w-[75%] pb-20">
       {allItems.length ? (
         allItems.map((item) =>
           item.status === "FOUND" ? (
@@ -19,7 +19,7 @@ export default function Feed({ initialData, fallback }) {
         )
       ) : (
         <div className="text-black font-medium col-start-2 text-xl">
-          {fallback}
+          NO ITEMS FOUND...
         </div>
       )}
     </main>

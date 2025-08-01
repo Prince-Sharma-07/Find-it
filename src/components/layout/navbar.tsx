@@ -6,6 +6,9 @@ import { Search } from "lucide-react";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import ModeBtn from "../ui/mode-btn";
+import { Button } from "../ui/button";
+import Sidebar from "./sidebar";
 
 export default async function Navbar() {
   const cookie = await cookies();
@@ -31,7 +34,7 @@ export default async function Navbar() {
     });
   }
   return (
-    <header className="h-16 bg-[#020817] text-white flex items-center justify-between px-8  border-b-border-secondary border-b">
+    <header className="h-16 sticky top-0 z-10 backdrop-blur-3xl bg-white/60 dark:bg-gray-900/60 dark:text-white flex items-center justify-between px-3 md:px-8  border-b">
       <Link href="/" className="flex items-center gap-2">
         <span className="p-2 bg-green-400 rounded-2xl">
           <Search />
@@ -40,52 +43,53 @@ export default async function Navbar() {
       </Link>
 
       <nav className="flex justify-center max-md:hidden">
-        <ul className="flex items-center gap-6">
+        <ul className="flex items-center gap-6 font-medium text-lg">
           <li>
-            <Link href="/search" className="text-white hover:text-green-400">
+            <Link href="/" className="hover:text-green-400">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/search" className="hover:text-green-400">
               Search
             </Link>
           </li>
           <li>
-            <Link href="/my-posts" className="text-white hover:text-green-400">
+            <Link href="/my-posts" className="hover:text-green-400">
               My Posts
             </Link>
           </li>
           <li>
-            <Link href="/contact" className="text-white hover:text-green-400">
-              Contact
-            </Link>
-          </li>
-          <li>
-            <Link href="/search" className="text-white hover:text-green-400">
+            <Link href="/search" className="hover:text-green-400">
               Donate ❤️
             </Link>
           </li>
         </ul>
       </nav>
 
-      {token ? (
-        <div className="flex items-center gap-4">
-          <Link href="/profile" className="text-white hover:text-green-400">
-            {user.name}
-          </Link>
-          <button
-            onClick={logOutUser}
-            className="text-white hover:text-green-400"
-          >
-            Logout
-          </button>
-        </div>
-      ) : (
-        <div className="flex items-center gap-4">
-          <Link href="/login" className="text-white hover:text-green-400">
-            Login
-          </Link>
-          <Link href="/signup" className="text-white hover:text-green-400">
-            Get Started
-          </Link>
-        </div>
-      )}
+      <div className="flex gap-4">
+        {token ? (
+          <div className="flex items-center gap-4">
+            
+            
+          </div>
+        ) : (
+          <div className="flex items-center gap-5">
+            <Link
+              href="/signup"
+            >
+              <Button
+                type="submit"
+                className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 cursor-pointer h-full"
+              >
+                Get Started
+              </Button>
+            </Link>
+          </div>
+        )}
+        <ModeBtn />
+        <Sidebar />
+      </div>
     </header>
   );
 }

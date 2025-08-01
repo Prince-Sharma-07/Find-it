@@ -104,10 +104,10 @@ export async function getAllItems() {
 
 export async function getCurrentUser() {
   const cookie = await cookies();
-  const token = cookie.get("token")?.value;
+  const token = cookie.get("token")?.value || "";
 
-  if (!token?.length) {
-    redirect("/");
+  if (!token) {
+    return;
   }
 
   let user;
@@ -118,21 +118,30 @@ export async function getCurrentUser() {
     redirect("/");
   }
 
-  const userData = await prismaClient.user.findUnique({
-    where: {
-      id: user.id,
-    },
-  });
+   try {
+    const userData = await prismaClient.user.findUnique({
+      where: {
+        id: user.id,
+      },
+    });
 
-  return userData;
+    if (!userData) {
+      redirect("/"); 
+    }
+
+    return userData;
+
+  } catch (err) {
+    console.error("Error while fetching user data from DB:", err);
+    redirect("/"); 
+  }
 }
 
 export async function deletePost(id) {
-  
   try {
-   await prismaClient.item.delete({
+    await prismaClient.item.delete({
       where: {
-        id: id
+        id: id,
       },
     });
     return {
@@ -144,4 +153,33 @@ export async function deletePost(id) {
       message: err.message,
     };
   }
+}
+
+export async function updatePost(updatedData, id) {
+  try {
+    await prismaClient.item.update({
+      where: {
+        id: id,
+      },
+      data: updatedData,
+    });
+    return {
+      success: true,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: err.message,
+    };
+  }
+}
+
+export async function isLoggedIn() {
+  const cookie = await cookies();
+  const token = cookie.get("token")?.value || "";
+
+  if (!token) {
+    return false;
+  }
+  return true
 }

@@ -1,4 +1,5 @@
 //@ts-nocheck
+import ThemeContextProvider from "@/contexts/ThemeContextProvider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
@@ -31,11 +32,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme = "light">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}
       >
-        {children}
+        <ThemeContextProvider>{children}</ThemeContextProvider>
       </body>
     </html>
   );

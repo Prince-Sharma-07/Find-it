@@ -2,18 +2,17 @@
 import { deletePost } from "@/actions";
 import { Trash } from "lucide-react";
 
-export default function DeleteBtn({id} : {id : string}) {
-  console.log(id)
-  async function handleDelete() {
+export default function DeleteBtn({id , handleDelete} : {id : string}) {
+ 
+  async function handlePostDelete() {
     const res = await deletePost(id);
     if (!res.success) {
-      console.log(res.message);
-    } else {
-      alert("Item Deleted Successfully!");
+      alert(res.message);
     }
+    handleDelete(id)
   }
 
   return (
-      <Trash className="cursor-pointer" onClick={handleDelete} />
+      <Trash className="cursor-pointer" onClick={handlePostDelete} />
   );
 }

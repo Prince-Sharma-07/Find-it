@@ -1,24 +1,27 @@
+'use client'
+import { SearchIcon } from "lucide-react";
+import { Button } from "./button";
+
 //@ts-nocheck
-export default function SearchInput({className} : {className : string}) {
+export default function SearchInput() {
   return (
-    <label className={`input ${className}`} >
-      <svg
-        className="h-[1em] opacity-50"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-      >
-        <g
-          strokeLinejoin="round"
-          strokeLinecap="round"
-          strokeWidth="2.5"
-          fill="none"
-          stroke="currentColor"
-        >
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.3-4.3"></path>
-        </g>
-      </svg>
-      <input type="search" required placeholder="Search" />
-    </label>
+    <form
+      onSubmit={e=>e.preventDefault()}
+      className={"flex border-2 bg-transparent items-center rounded-md justify-between w-full"}
+    >
+      <label htmlFor="searchbox" className="flex items-center p-2">
+      <SearchIcon className=""/>
+      </label>
+      <input
+        id="searchbox"
+        type="search"
+        placeholder="Search"
+        className="border-none outline-none px-1 sm:flex-1"
+      />
+      
+      <Button type="submit" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 cursor-pointer">
+        Search
+      </Button>
+    </form>
   );
 }
