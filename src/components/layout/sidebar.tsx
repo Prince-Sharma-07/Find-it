@@ -1,14 +1,12 @@
 //@ts-nocheck
 import { getCurrentUser, isLoggedIn, logOutUser } from "@/actions";
 import { LogOut, Menu } from "lucide-react";
-import Link from "next/link";
+import { DrawerLinks } from "../ui/drawer-links";
 import UserBar from "../ui/user-bar";
-import { Suspense } from "react";
-import UserProfile from "../skeletons/user-profile";
 
 export default async function Sidebar() {
-
-const isLogged = await isLoggedIn()
+  const isLogged = await isLoggedIn();
+  const user = await getCurrentUser();
 
   return (
     <div className="drawer drawer-end">
@@ -16,7 +14,10 @@ const isLogged = await isLoggedIn()
       <div className="drawer-content">
         {/* Page content here */}
 
-        <label htmlFor="my-drawer-4" className="drawer-button btn bg-green-400 border-none text-black">
+        <label
+          htmlFor="my-drawer-4"
+          className="drawer-button btn bg-green-400 border-none text-black"
+        >
           <Menu />
         </label>
       </div>
@@ -30,12 +31,9 @@ const isLogged = await isLoggedIn()
           id="my-drawer-4"
           className="menu bg-base-200 text-base-content min-h-full w-80 p-4"
         >
-          <li>
-            <Suspense fallback={<UserProfile />}>
-             <UserBar />
-            </Suspense>
-          </li>
-          <li>
+          <UserBar user={user} />
+
+          {/* <li>
             <Link href="/" className="hover:text-green-400">
               Home
             </Link>
@@ -54,14 +52,19 @@ const isLogged = await isLoggedIn()
             <Link href="/search" className="hover:text-green-400">
               Donate ❤️
             </Link>
-          </li>
-          {isLogged ? <li>
-            <form
-              action={logOutUser}
-            >
-              <button className="hover:text-green-400 flex gap-2 items-center cursor-pointer">Logout <LogOut /></button> 
-            </form>
-          </li> : <></>}
+          </li> */}
+          <DrawerLinks />
+          {isLogged ? (
+            <li>
+              <form action={logOutUser}>
+                <button className="hover:text-green-400 flex gap-2 items-center cursor-pointer">
+                  Logout <LogOut />
+                </button>
+              </form>
+            </li>
+          ) : (
+            <></>
+          )}
         </ul>
       </div>
     </div>
