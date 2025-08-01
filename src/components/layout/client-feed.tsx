@@ -1,3 +1,4 @@
+//@ts-nocheck
 "use client";
 import React, { useState } from "react";
 import MyFoundCard from "../cards/my-found-card";

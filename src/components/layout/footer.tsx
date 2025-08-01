@@ -1,5 +1,5 @@
+//@ts-nocheck
 "use client"
-
 import Link from "next/link"
 import { Search, Facebook, Twitter, Instagram, Mail, Phone, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"

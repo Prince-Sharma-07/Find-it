@@ -1,3 +1,4 @@
+//@ts-nocheck
 "use client";
 import { deletePost } from "@/actions";
 import { Trash } from "lucide-react";

@@ -39,7 +39,7 @@ export default function SignUp() {
   }
   return (
     <div className="flex w-full min-h-screen">
-      <div className="flex-1 flex flex-col items-center justify-center bg-gradient-to-br from-[#107e43] to-[#067954] p-8 gap-8">
+      <div className="flex-1 max-md:hidden flex flex-col items-center justify-center bg-gradient-to-br from-[#107e43] to-[#067954] p-8 gap-8">
         <h1 className="text-white text-5xl font-bold">
           Join Your Community Network
         </h1>

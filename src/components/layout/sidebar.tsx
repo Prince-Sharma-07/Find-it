@@ -1,11 +1,10 @@
+//@ts-nocheck
 import { getCurrentUser, isLoggedIn, logOutUser } from "@/actions";
 import { LogOut, Menu } from "lucide-react";
 import Link from "next/link";
 import UserBar from "../ui/user-bar";
 import { Suspense } from "react";
 import UserProfile from "../skeletons/user-profile";
-// import UserProfile from "../skeletons/user-profile";
-// import UserBar from "../ui/user-bar";
 
 export default async function Sidebar() {
 

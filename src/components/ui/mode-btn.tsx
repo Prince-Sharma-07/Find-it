@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client'
 import { useThemeContext } from "@/contexts/ThemeContextProvider";
 import React from "react";

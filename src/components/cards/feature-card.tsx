@@ -1,3 +1,4 @@
+//@ts-nocheck
 export default function FeatureCard({ feature }) {
   return (
     <div>

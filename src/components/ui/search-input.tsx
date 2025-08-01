@@ -1,8 +1,8 @@
+//@ts-nocheck
 'use client'
 import { SearchIcon } from "lucide-react";
 import { Button } from "./button";
 
-//@ts-nocheck
 export default function SearchInput() {
   return (
     <form

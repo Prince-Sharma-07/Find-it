@@ -39,7 +39,7 @@ export default async function Navbar() {
         <span className="p-2 bg-green-400 rounded-2xl">
           <Search />
         </span>
-        <h1 className="text-xl font-bold">Find It</h1>
+        <h1 className="text-xl font-bold">Find it</h1>
       </Link>
 
       <nav className="flex justify-center max-md:hidden">
@@ -74,7 +74,7 @@ export default async function Navbar() {
             
           </div>
         ) : (
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5 max-sm:hidden">
             <Link
               href="/signup"
             >

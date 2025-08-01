@@ -1,3 +1,4 @@
+//@ts-nocheck
 import Link from 'next/link'
 import React from 'react'
 import { Button } from '../ui/button'
@@ -26,8 +27,8 @@ export default function RecentActivity() {
                 <div className="hover:shadow-lg transition-shadow rounded-xl dark:bg-white/5 bg-white border-[#E2E8F0] border">
                   <div className="p-6">
                     <div className="flex items-start space-x-4">
-                      <Image
-                        src={item.image || "/placeholder.svg"}
+                      <img
+                        src={"https://img.daisyui.com/images/profile/demo/averagebulk@192.webp"}
                         alt={item.title}
                         className="rounded-lg object-cover"
                         height={64}

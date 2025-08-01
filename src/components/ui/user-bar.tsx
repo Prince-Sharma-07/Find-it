@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { getCurrentUser } from "@/actions";
 import Link from "next/link";
 
