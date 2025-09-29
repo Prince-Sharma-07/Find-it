@@ -20,11 +20,11 @@ export default function SearchInput() {
         className="border-none outline-none px-1 sm:flex-1"
       />
       
-      <Link href='/search'>
+      <Link href='/explore'>
       <Button type="submit" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 cursor-pointer">
         Search
       </Button>
-      </Link>
+      </Link>   
     </form>
   );
 }

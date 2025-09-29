@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { logOutUser } from "@/actions";
+import { getCurrentUser, logOutUser } from "@/actions";
 import { verifyToken } from "@/services/jwt";
 import prismaClient from "@/services/prisma";
 import { Search } from "lucide-react";
@@ -11,28 +11,8 @@ import { Button } from "../ui/button";
 import Sidebar from "./sidebar";
 
 export default async function Navbar() {
-  const cookie = await cookies();
-  const token = cookie.get("token")?.value;
-  let userData = {};
-  let user = {};
+  const user = await getCurrentUser()
 
-  if (!token) {
-  } else {
-    try {
-      userData = verifyToken(token);
-    } catch (err) {
-      console.log(err);
-      redirect("/login");
-    }
-    user = await prismaClient.user.findUnique({
-      where: {
-        id: userData.id,
-      },
-      omit: {
-        password: true,
-      },
-    });
-  }
   return (
     <header className="h-16 sticky top-0 z-10 backdrop-blur-3xl bg-white/60 dark:bg-gray-900/60 dark:text-white flex items-center justify-between px-3 md:px-8  border-b">
       <Link href="/" className="flex items-center gap-2">
@@ -50,8 +30,8 @@ export default async function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/search" className="hover:text-green-400">
-              Search
+            <Link href="/explore" className="hover:text-green-400">
+              Explore
             </Link>
           </li>
           <li>
@@ -68,9 +48,8 @@ export default async function Navbar() {
       </nav>
 
       <div className="flex gap-4">
-        {token ? (
+        {user ? (
           <div className="flex items-center gap-4">
-            
             
           </div>
         ) : (

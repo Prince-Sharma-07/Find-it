@@ -1,11 +1,12 @@
-//@ts-nocheck
 import ThemeContextProvider from "@/contexts/ThemeContextProvider";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
-import "./globals.css";
+import './globals.css'
+import UserContextProvider from "@/contexts/UserContextProvider";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-geist-sans",   
   subsets: ["latin"],
 });
 
@@ -36,7 +37,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}
       >
-        <ThemeContextProvider>{children}</ThemeContextProvider>
+        <Toaster />
+
+        <ThemeContextProvider>
+          <UserContextProvider>{children}</UserContextProvider>
+        </ThemeContextProvider>
       </body>
     </html>
   );

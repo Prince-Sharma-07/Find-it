@@ -1,17 +1,37 @@
-//@ts-nocheck
 "use client";
-import { signUpUser } from "@/actions";
+import { Locate } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 export default function SignUp() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
   const [password, setPasword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+
+  const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+function success(pos : GeolocationPosition) {
+  console.log(pos)
+  const crd = pos.coords;
+  setAddress(JSON.stringify(crd));
+}
+
+function errors(err : any) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+  function handleCurrentLocation(){
+     navigator.geolocation.getCurrentPosition(success , errors , options)
+  }
 
   async function handleSignUp(e: FormEvent) {
     e.preventDefault();
@@ -19,21 +39,27 @@ export default function SignUp() {
     const user = {
       name,
       email,
-      location,
+      address,
       password,
       confirmPassword,
     };
 
-    const res = await signUpUser(user);
+    const res = await fetch('/api/signup' , {
+      method : "POST",
+      body: JSON.stringify(user)
+    })
 
-    if (!res.success) {
-      if (res.message.includes("User_email_key")) {
+    const data = await res.json();
+    console.log(data);
+    if (!data.success) {
+      if (data.message.includes("User_email_key")) {
         setError("User already Exists!");
       } else {
-        console.log(res.message);
+        console.log(data.message);
         setError("Something went Wrong");
       }
     } else {
+      toast("Signed Up Successfully!")
       redirect("/");
     }
   }
@@ -48,7 +74,7 @@ export default function SignUp() {
           stronger.
         </p>
       </div>
-      <div className="flex-1 flex flex-col items-center justify-center bg-primary p-8 text-white shadow-lg w-1/2">
+      <div className="flex-1 flex flex-col items-center justify-center dark:bg-[#020817] p-8 dark:text-white shadow-lg w-1/2">
         <h2 className="text-2xl font-bold mb-4">Create Your Account</h2>
         <p className="mb-6">Start helping your community today</p>
         <form
@@ -81,14 +107,15 @@ export default function SignUp() {
             />
           </label>
           <label className="flex flex-col gap-2">
-            Location
+            Address
             <input
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               type="text"
               placeholder="Location"
               className="p-2 rounded-lg border-[#1E293B] border"
             />
+            <button type="button" onClick={handleCurrentLocation} className="text-start flex gap-2"><Locate /> Current Location</button>
           </label>
           <label className="flex flex-col gap-2">
             Password

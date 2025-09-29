@@ -16,7 +16,7 @@ export default async function Sidebar() {
 
         <label
           htmlFor="my-drawer-4"
-          className="drawer-button btn bg-green-400 border-none text-black"
+          className="drawer-button btn bg-green-400 border-none text-black rounded-xl"
         >
           <Menu />
         </label>

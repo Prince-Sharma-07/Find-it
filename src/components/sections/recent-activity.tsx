@@ -18,7 +18,7 @@ export default function RecentActivity() {
               See what's happening in your community right now
             </p>
           </div>
-          <Link href="/search">
+          <Link href="/explore">
             <Button variant="outline">View All</Button>
           </Link>
         </div>

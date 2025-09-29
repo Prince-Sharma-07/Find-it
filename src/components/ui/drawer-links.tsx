@@ -15,7 +15,7 @@ export function DrawerLinks() {
         <Link href="/" className="hover:text-green-400 w-full block">Home</Link>
       </li>
       <li onClick={closeDrawer}>
-        <Link href="/search" className="hover:text-green-400 w-full block">Search</Link>
+        <Link href="/explore" className="hover:text-green-400 w-full block">Search</Link>
       </li>
       <li onClick={closeDrawer}>
         <Link href="/my-posts" className="hover:text-green-400 w-full block">My Posts</Link>

@@ -1,16 +1,17 @@
-//@ts-nocheck
-'use client'
-import { useState } from "react";
+import { Item } from "../../../generated/prisma";
 import FoundCard from "../cards/found-card";
 import LostCard from "../cards/lost-card";
 
-export default function SearchFeed({ initialData }) {
-  const [allItems, setAllItems] = useState(initialData);
-  
+export default async function SearchFeed() {
+  let allItems = [];
+  const res = await fetch(process.env.HOST_NAME + "/api/posts");
+  const data = await res.json();
+  allItems = data?.data;
+
   return (
     <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-[85%] md:w-[85%] lg:w-[80%] xl:w-[75%] pb-20">
-      {allItems.length ? (
-        allItems.map((item) =>
+      {allItems?.length ? (
+        allItems.map((item : Item) =>
           item.status === "FOUND" ? (
             <FoundCard key={item.id} item={item} />
           ) : (
