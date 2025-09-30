@@ -1,30 +1,25 @@
-//@ts-nocheck
-'use client'
 import { SearchIcon } from "lucide-react";
 import { Button } from "./button";
-import Link from "next/link";
 
 export default function SearchInput() {
   return (
     <form
-      onSubmit={e=>e.preventDefault()}
+      action={'/explore'}
       className={"flex border-2 bg-transparent items-center rounded-md justify-between w-full"}
     >
       <label htmlFor="searchbox" className="flex items-center p-2">
-      <SearchIcon className=""/>
+      <SearchIcon/>
       </label>
       <input
         id="searchbox"
         type="search"
+        name="q"
         placeholder="Search"
         className="border-none outline-none px-1 sm:flex-1"
       />
-      
-      <Link href='/explore'>
       <Button type="submit" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 cursor-pointer">
         Search
       </Button>
-      </Link>   
     </form>
   );
 }

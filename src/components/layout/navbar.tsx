@@ -40,7 +40,7 @@ export default async function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/search" className="hover:text-green-400">
+            <Link href="/donate" className="hover:text-green-400">
               Donate ❤️
             </Link>
           </li>

@@ -1,6 +1,7 @@
 "use client";
 import { useUserContext } from "@/contexts/UserContextProvider";
 import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
+import { Locate } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
 
@@ -9,18 +10,18 @@ export default function FoundCardInput() {
   const [description, setDescription] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const {user} = useUserContext();
+  const { user } = useUserContext();
 
   async function handleItemFound(e: FormEvent) {
     e.preventDefault();
     setError("");
-    
+
     const item = {
       name,
       description,
       location,
       status: "FOUND",
-      authorId: user?.id
+      authorId: user?.id,
     };
 
     const res = await fetch("/api/found", {
@@ -35,7 +36,7 @@ export default function FoundCardInput() {
     } else {
       toast(data?.message);
       handleCancel();
-      window.location.href = '/'
+      window.location.href = "/";
     }
   }
 
@@ -44,6 +45,26 @@ export default function FoundCardInput() {
     setDescription("");
     setLocation("");
     setError("");
+  }
+
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
+  function success(pos: GeolocationPosition) {
+    console.log(pos);
+    const crd = pos.coords;
+    setLocation(JSON.stringify(crd));
+  }
+
+  function errors(err: any) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  function handleCurrentLocation() {
+    navigator.geolocation.getCurrentPosition(success, errors, options);
   }
 
   return (
@@ -96,6 +117,13 @@ export default function FoundCardInput() {
               placeholder="Edit location"
             />
           </label>
+          <button
+            type="button"
+            onClick={handleCurrentLocation}
+            className="text-start flex gap-2"
+          >
+            <Locate /> Current Location
+          </button>
         </Flex>
 
         <Flex gap="3" mt="4" justify="end">

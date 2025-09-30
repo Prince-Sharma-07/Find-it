@@ -1,13 +1,8 @@
-// 'use client'
-//@ts-nocheck
 import FoundCardInput from "../cards/FoundCardInput";
 import LostCardInput from "../cards/LostCardInput";
 import SearchInput from "../ui/search-input";
 
 export default function Hero() {
-  // const [lostDialog , setLostDialog] = useState(false);
-  // const [foundDialog , setFoundDialog] = useState(false);
-  
   return (
     <div className="flex w-full flex-col items-center bg-[#F7F9FB] dark:bg-gray-900 p-8 gap-8 text-center">
       <div className="flex flex-col gap-8">
@@ -28,29 +23,10 @@ export default function Hero() {
         <SearchInput />
       </div>
 
-      
-
       <div className="flex-1 flex items-center justify-center p-2 dark:text-white  w-1/2 gap-8">
-      {/* {lostDialog && <LostCardInput setLostDialog={setLostDialog}/>} */}
-      <LostCardInput />
-        {/* <button
-          onClick={()=>setLostDialog(!lostDialog)}
-          className="max-md:hidden font-medium px-4 py-2 bg-gradient-to-r from-[#DC2627] to-[#DB2775] rounded-md"
-        >
-          Report Lost item
-        </button>
-        */}
-        <FoundCardInput/>
-        
-        {/* <button
-          onClick={()=>setLostDialog(!lostDialog)}
-          className="md:hidden text-nowrap font-medium px-4 py-2 bg-gradient-to-r from-[#DC2627] to-[#DB2775] rounded-md"
-        >
-          Lost item
-        </button> */}
-        <button
-          className="md:hidden text-nowrap font-medium px-4 py-2 border-[#22C55E] border rounded-md"
-        >
+        <LostCardInput />
+        <FoundCardInput />
+        <button className="md:hidden text-nowrap font-medium px-4 py-2 border-[#22C55E] border rounded-md">
           Found item
         </button>
       </div>

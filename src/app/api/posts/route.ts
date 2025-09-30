@@ -1,9 +1,10 @@
+import { getPosts } from "@/actions";
 import prismaClient from "@/services/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const posts = await prismaClient.item.findMany();
+    const posts = await getPosts();
     if (posts.length) {
       return NextResponse.json({
         success: true,

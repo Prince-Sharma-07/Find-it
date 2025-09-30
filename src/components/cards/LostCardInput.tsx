@@ -1,6 +1,7 @@
 "use client";
 import { useUserContext } from "@/contexts/UserContextProvider";
 import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
+import { Locate } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
@@ -10,23 +11,27 @@ export default function LostCardInput() {
   const [description, setDescription] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const {user} = useUserContext();
+  const { user } = useUserContext();
 
   async function handleItemLost(e: FormEvent) {
     e.preventDefault();
     setError("");
 
-    if(name.trim() == "" || description.trim() == "" || location.trim() == ""){
+    if (
+      name.trim() == "" ||
+      description.trim() == "" ||
+      location.trim() == ""
+    ) {
       setError("Fields Can't be empty");
       return;
     }
-    
+
     const item = {
       name,
       description,
       location,
       status: "LOST",
-      authorId: user?.id 
+      authorId: user?.id,
     };
 
     const res = await fetch("/api/lost", {
@@ -42,7 +47,7 @@ export default function LostCardInput() {
     } else {
       toast(data?.message);
       handleCancel();
-      window.location.href = '/'
+      window.location.href = "/";
     }
   }
 
@@ -51,6 +56,26 @@ export default function LostCardInput() {
     setDescription("");
     setLocation("");
     setError("");
+  }
+
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
+  function success(pos: GeolocationPosition) {
+    console.log(pos);
+    const crd = pos.coords;
+    setLocation(JSON.stringify(crd));
+  }
+
+  function errors(err: any) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  function handleCurrentLocation() {
+    navigator.geolocation.getCurrentPosition(success, errors, options);
   }
 
   return (
@@ -70,7 +95,9 @@ export default function LostCardInput() {
         <Flex direction="column" gap="3">
           {error.length ? (
             <span className="text-red-400 text-sm text-center">{error}</span>
-          ) : <></>}
+          ) : (
+            <></>
+          )}
           <label>
             <Text as="div" size="2" mb="1" weight="bold">
               Name
@@ -101,6 +128,32 @@ export default function LostCardInput() {
               placeholder="Edit location"
             />
           </label>
+          <button
+            type="button"
+            onClick={handleCurrentLocation}
+            className="text-start flex gap-2"
+          >
+            <Locate /> Current Location
+          </button>
+
+          {/* <label htmlFor="camera-input">Upload</label>
+          <input
+            type="file"
+            accept="image/*"
+            capture="environment" // This opens camera on mobile
+            // onChange={handleFileSelect}
+            className="hidden"
+            id="camera-input"
+          />
+<label htmlFor="gallery-input">H</label>
+          <input
+     type="file"
+     accept="image/*"  // No capture attribute = opens gallery
+    //  onChange={handleFileSelect}
+     className="hidden"
+     id="gallery-input"
+   /> */}
+
         </Flex>
 
         <Flex gap="3" mt="4" justify="end">

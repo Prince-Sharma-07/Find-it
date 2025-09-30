@@ -95,3 +95,8 @@ export async function isLoggedIn() {
   }
   return true
 }
+
+export async function getPosts() {
+  const data = await prismaClient.item.findMany();
+  return data;
+}
